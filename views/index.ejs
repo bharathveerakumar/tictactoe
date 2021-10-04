@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe using Node-js and Socket.io</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
+    <script src="https://kit.fontawesome.com/1a578ea132.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="grid">
+        <div class="row">
+            <div data-index="11" class="item"></div>
+            <div data-index="12" class="item"></div>
+            <div data-index="13" class="item"></div>
+        </div>
+        <div class="row">
+            <div data-index="21" class="item"></div>
+            <div data-index="22" class="item"></div>
+            <div data-index="23" class="item"></div>
+        </div>
+        <div class="row">
+            <div data-index="31" class="item"></div>
+            <div data-index="32" class="item"></div>
+            <div data-index="33" class="item"></div>
+        </div>
+    </div>
+    <h1 class="none"><b>You Won this Battle! :)</b></h1>
+    <h1 class="lost none">You Lost this battle! :(</h1>
+    <div class="msg">
+        <h2>Your opponent wants to Play Again</h2>
+        <div>
+            <button onclick="accept()">Accept</button>
+            <button onclick="decline()">Decline</button> 
+        </div>
+    </div>
+    <h2 class="declineMsg none">Opponent Declines your request</h2>
+    <button onclick="playAgain()" class="none pa">Play Again</button>
+    <script src="script.js"></script>
+</body>
+</html>
