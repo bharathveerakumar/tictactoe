@@ -1,0 +1,36 @@
+*{
+    margin: none;
+    padding: none;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+form{
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+button{
+    border: none;
+    background-color: black;
+    color: white;
+    font-weight: bolder;
+    font-size: 30px;
+    padding: 15px;
+}
+
+input{
+    width: 50%;
+    padding: 15px;
+}
