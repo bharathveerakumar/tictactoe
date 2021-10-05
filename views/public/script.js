@@ -5,11 +5,11 @@ let but=document.querySelector('.pa');
 let msg=document.querySelector('.msg');
 let decline1=document.querySelector('.declineMsg');
 
-let hashMap=new Map(), flag=0, hashMap1=new Map(), hashMap2=new Map();
+let hashMap=new Map(), flag=0, hashMap1=new Map(), hashMap2=new Map(), cnt2=0;
 
 items.forEach(item=>item.addEventListener('click', action));
 
-const socket=io('https://tic-tac-toe-b.herokuapp.com/');
+const socket=io('http://localhost:5000');
 
 let url=window.location.href;
 url=new URL(url);
@@ -20,11 +20,20 @@ socket.auth={
 };
 
 socket.on('msg', (data)=>{
+    cnt2++;
     hashMap2.set(parseInt(data), 1);
     if(!check(hashMap2, parseInt(data))){
-        hashMap.set(parseInt(data), 1), flag=0;
-        if(cnt%2) document.querySelector(`[data-index="${data}"]`).innerHTML='<i class="fas fa-circle"></i>', cnt=0;
-        else document.querySelector(`[data-index="${data}"]`).innerHTML='<i class="fas fa-times"></i>', cnt++;
+        console.log(cnt2);
+        if(cnt2!==9){
+            hashMap.set(parseInt(data), 1), flag=0;
+            if(cnt%2) document.querySelector(`[data-index="${data}"]`).innerHTML='<i class="fas fa-circle"></i>', cnt=0;
+            else document.querySelector(`[data-index="${data}"]`).innerHTML='<i class="fas fa-times"></i>', cnt++;
+        }
+        else{
+            if(cnt%2) document.querySelector(`[data-index="${data}"]`).innerHTML='<i class="fas fa-circle"></i>', cnt=0;
+            else document.querySelector(`[data-index="${data}"]`).innerHTML='<i class="fas fa-times"></i>', cnt++;
+            but.classList.toggle('none');
+        }
     }
     else{
         if(cnt%2) document.querySelector(`[data-index="${data}"]`).innerHTML='<i class="fas fa-circle"></i>', cnt=0;
@@ -57,11 +66,20 @@ function check(hashMap1, index){
 function action(){
     let val=parseInt(this.dataset.index);
     if(!hashMap.has(val)&&!flag){
+        cnt2++;
         hashMap.set(val, 1), hashMap1.set(val, 1), flag=1;
         if(!check(hashMap1, val)){ 
-            socket.emit('msg', val);
-            if(cnt%2) this.innerHTML='<i class="fas fa-circle"></i>', cnt=0;
-            else this.innerHTML='<i class="fas fa-times"></i>', cnt++;
+            if(cnt2!==9){
+                socket.emit('msg', val);
+                if(cnt%2) this.innerHTML='<i class="fas fa-circle"></i>', cnt=0;
+                else this.innerHTML='<i class="fas fa-times"></i>', cnt++;
+            }
+            else{
+                socket.emit('msg', val);
+                if(cnt%2) this.innerHTML='<i class="fas fa-circle"></i>', cnt=0;
+                else this.innerHTML='<i class="fas fa-times"></i>', cnt++;
+                but.classList.toggle('none');
+            }
         }
         else{
             socket.emit('msg', val);
