@@ -9,7 +9,7 @@ let hashMap=new Map(), flag=0, hashMap1=new Map(), hashMap2=new Map(), cnt2=0;
 
 items.forEach(item=>item.addEventListener('click', action));
 
-const socket=io('http://localhost:5000');
+const socket=io('https://tic-tac-toe-b.herokuapp.com/');
 
 let url=window.location.href;
 url=new URL(url);
